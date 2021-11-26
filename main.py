@@ -1,6 +1,7 @@
 import argparse #imported argparse module
 import time #imported time module
 from datetime import datetime, timezone
+import matplotlib.pyplot as plt
 
 #import modules to fetch information from a public API 
 from bitstamp import get_price 
@@ -30,8 +31,12 @@ if args.date is not None:
 
 	#execute the function
 	dates,values = get_time_series(timestamp,'btceur')
-	print(dates)
-	print(values)
+	
+	plt.plot(dates,values)
+	plt.title('Graph')
+	plt.xlabel('Dates')
+	plt.ylabel('Values')
+	plt.show()
 
 else:
 	#The case in which the fiat selection is eur
