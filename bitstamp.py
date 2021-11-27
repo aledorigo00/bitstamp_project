@@ -22,7 +22,7 @@ def get_time_series(start, currency):
         - currency: the currency pair to be retreived (e.g. btceur, ethusd)
     '''
     time_series_URL = 'https://www.bitstamp.net/api/v2/ohlc/'+currency+'/'
-    r = requests.get(time_series_URL, params={'start':start, 'step':1800, 'limit':100})
+    r = requests.get(time_series_URL, params={'start':start, 'step':86400, 'limit':1000})
     total = json.loads(r.text)
     data=total['data']
     ohlc=data['ohlc']
