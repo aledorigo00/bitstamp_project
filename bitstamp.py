@@ -21,7 +21,7 @@ def read_ohlc_data(response):
     total = json.loads(response.text)
     data=total['data']
     ohlc=data['ohlc']
-    
+
     dates = []
     prices = []
     for point in ohlc:
@@ -29,6 +29,28 @@ def read_ohlc_data(response):
         prices.append(float(point['close']))
 
     return dates, prices
+
+def read_ohlc_data_extended(response):
+    '''This function takes as input the http response, dives through the data dictionary
+    and builds two vectors, one for dates and one for prices, to be returned
+    '''
+    total = json.loads(response.text)
+    data=total['data']
+    ohlc=data['ohlc']
+    
+    dates = []
+    openings = []
+    closings = []
+    highs = []
+    lows = []
+    for point in ohlc:
+        dates.append(datetime.fromtimestamp(int(point['timestamp'])))
+        openings.append(float(point['open']))
+        closings.append(float(point['close']))
+        highs.append(float(point['high']))
+        lows.append(float(point['low']))
+
+    return dates, openings, closings, highs, lows
 
 def get_time_series_30min(start, currency): 
     '''This functions returns the price time serie every 30 minutes of a currency pair, 
