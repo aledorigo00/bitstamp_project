@@ -1,9 +1,8 @@
-import argparse #imported argparse module
-from datetime import time #imported time module
-from datetime import datetime, timezone
+#imported needed modules
+import argparse 
+from datetime import datetime, timezone 
 from datetime import date
 from datetime import timedelta
-import matplotlib.pyplot as plt
 
 #import modules from bitstapm.py to fetch information from a public API 
 from bitstamp import get_price
@@ -43,7 +42,7 @@ if args.date is not None:
 	#the Unix timestamp format required by the API
 	dt = datetime( year, month, day, 00, 00, 00, tzinfo=timezone.utc )
 	input_timestamp = int( dt.timestamp() )
-
+	
 	'''
 	gather today's date and calculate the date of one week ago for 
 	choosing the right frequence of datapoint:
