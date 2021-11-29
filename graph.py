@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 
-def plot_graph(dates, values):
+def plot_graph(currency, dates, values):
     plt.plot(dates,values)
     plt.title('Graph')
     plt.xlabel('Dates')

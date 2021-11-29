@@ -1,3 +1,4 @@
+#https://www.bitstamp.net/api/#ohlc_data
 import requests
 import json
 from datetime import datetime
@@ -22,12 +23,12 @@ def read_ohlc_data(response):
     ohlc=data['ohlc']
     
     dates = []
-    values = []
+    prices = []
     for point in ohlc:
         dates.append(datetime.fromtimestamp(int(point['timestamp'])))
-        values.append(float(point['close']))
+        prices.append(float(point['close']))
 
-    return dates, values
+    return dates, prices
 
 def get_time_series_30min(start, currency): 
     '''This functions returns the price time serie every 30 minutes of a currency pair, 
@@ -36,8 +37,8 @@ def get_time_series_30min(start, currency):
         - currency: the currency pair to be retreived (e.g. btceur, ethusd)'''
     time_series_URL = 'https://www.bitstamp.net/api/v2/ohlc/'+currency+'/'
     r = requests.get(time_series_URL, params={'start':start, 'step':1800, 'limit':1000})
-    dates, values = read_ohlc_data(r)
-    return dates, values
+    dates, prices = read_ohlc_data(r)
+    return dates, prices
 
 
 def get_time_series_4hours(start, currency):
@@ -47,8 +48,8 @@ def get_time_series_4hours(start, currency):
         - currency: the currency pair to be retreived (e.g. btceur, ethusd)'''
     time_series_URL = 'https://www.bitstamp.net/api/v2/ohlc/'+currency+'/'
     r = requests.get(time_series_URL, params={'start':start, 'step':14400, 'limit':1000})
-    dates, values = read_ohlc_data(r)
-    return dates, values
+    dates, prices = read_ohlc_data(r)
+    return dates, prices
 
 
 def get_time_series_12hours(start, currency): 
@@ -58,8 +59,8 @@ def get_time_series_12hours(start, currency):
         - currency: the currency pair to be retreived (e.g. btceur, ethusd)'''
     time_series_URL = 'https://www.bitstamp.net/api/v2/ohlc/'+currency+'/'
     r = requests.get(time_series_URL, params={'start':start, 'step':43200, 'limit':1000})
-    dates, values = read_ohlc_data(r)
-    return dates, values
+    dates, prices = read_ohlc_data(r)
+    return dates, prices
 
 
 def get_time_series_oneday(start, currency):
@@ -69,6 +70,6 @@ def get_time_series_oneday(start, currency):
         - currency: the currency pair to be retreived (e.g. btceur, ethusd)'''
     time_series_URL = 'https://www.bitstamp.net/api/v2/ohlc/'+currency+'/'
     r = requests.get(time_series_URL, params={'start':start, 'step':86400, 'limit':1000})
-    dates, values = read_ohlc_data(r)
-    return dates, values
+    dates, prices = read_ohlc_data(r)
+    return dates, prices
 
