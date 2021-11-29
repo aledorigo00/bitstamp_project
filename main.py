@@ -13,7 +13,10 @@ from bitstamp import get_time_series_12hours
 from bitstamp import get_time_series_oneday
 
 #import modules from graph.py
-from graph import plot_graph
+from graph import plot_graph_30min
+from graph import plot_graph_4hours 
+from graph import plot_graph_12hours 
+from graph import plot_graph_oneday
 
 #import modules from csv.py
 from write_csv import write_csv
@@ -70,43 +73,43 @@ if args.date is not None:
 			write_csv(currency_pair, input_date, today, dates, prices)
 		else:
 			#Plot the graph	
-			plot_graph(currency_pair, dates, openings, closings, highs, lows)
+			plot_graph_30min(currency_pair, dates, openings, closings, highs, lows)
 
 	elif input_date >= two_weeks_ago:
 
 		#execute the function
-		dates,prices = get_time_series_4hours(input_timestamp, currency_pair)
+		dates, openings, closings, highs, lows = get_time_series_4hours(input_timestamp, currency_pair)
 			
 		if args.csv:
 			#create a csv file and write it on the folder
 			write_csv(currency_pair, input_date, today, dates, prices)
 		else:
 			#Plot the graph	
-			plot_graph(currency_pair, dates, prices)
+			plot_graph_4hours(currency_pair, dates, openings, closings, highs, lows)
 
 	elif input_date >= one_month_ago:
 
 		#execute the function
-		dates,prices = get_time_series_12hours(input_timestamp, currency_pair)
+		dates, openings, closings, highs, lows = get_time_series_12hours(input_timestamp, currency_pair)
 			
 		if args.csv:
 			#create a csv file and write it on the folder
 			write_csv(currency_pair, input_date, today, dates, prices)
 		else:
 			#Plot the graph	
-			plot_graph(currency_pair, dates, prices)
+			plot_graph_12hours(currency_pair, dates, openings, closings, highs, lows)
 
 	else:
 
 		#execute the function
-		dates,prices = get_time_series_oneday(input_timestamp, currency_pair)
+		dates, openings, closings, highs, lows = get_time_series_oneday(input_timestamp, currency_pair)
 			
 		if args.csv:
 			#create a csv file and write it on the folder
 			write_csv(currency_pair, input_date, today, dates, prices)
 		else:
 			#Plot the graph	
-			plot_graph(currency_pair, dates, prices)
+			plot_graph_oneday(currency_pair, dates, openings, closings, highs, lows)
 
 else:
 
