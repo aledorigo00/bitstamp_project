@@ -3,6 +3,7 @@ import argparse
 from datetime import datetime, timezone 
 from datetime import date
 from datetime import timedelta
+import pandas as pd
 
 #import modules from bitstamp.py to fetch information from a public API 
 from bitstamp import get_price
@@ -62,14 +63,14 @@ if args.date is not None:
 
 	if input_date >= four_days_ago:
 		#execute the function
-		dates,prices = get_time_series_30min(input_timestamp, currency_pair)
+		dates, openings, closings, highs, lows = get_time_series_30min(input_timestamp, currency_pair)
 		
 		if args.csv:
 			#create a csv file and write it on the folder
 			write_csv(currency_pair, input_date, today, dates, prices)
 		else:
 			#Plot the graph	
-			plot_graph(currency_pair, dates, prices)
+			plot_graph(currency_pair, dates, openings, closings, highs, lows)
 
 	elif input_date >= two_weeks_ago:
 
