@@ -8,7 +8,8 @@ import matplotlib.pyplot as plt
 #import modules to fetch information from a public API 
 from bitstamp import get_time_series_oneday
 from bitstamp import get_time_series_30min
-from bitstamp import get_time_series_3hours
+from bitstamp import get_time_series_4hours
+from bitstamp import get_time_series_12hours
 
 
 #Here we add the arguments that the users can input, namely crypto currency, 
@@ -47,9 +48,11 @@ if args.date is not None:
 	-if timestamp is over one week, datapoint every day
 	'''
 	today = date.today()
-	week_ago = today - timedelta(days=7)
+	four_days_ago = today - timedelta(days=4)
+	two_weeks_ago = today - timedelta(days=14)
+	one_month_ago = today - timedelta(days=30)
 
-	if input_date == today:
+	if input_date >= four_days_ago:
 		
 		#execute the function
 		dates,values = get_time_series_30min(input_timestamp,'btceur')
@@ -60,10 +63,21 @@ if args.date is not None:
 		plt.ylabel('Values')
 		plt.show()
 
-	elif input_date >= week_ago:
+	elif input_date >= two_weeks_ago:
 
 		#execute the function
-		dates,values = get_time_series_3hours(input_timestamp,'btceur')
+		dates,values = get_time_series_4hours(input_timestamp,'btceur')
+			
+		plt.plot(dates,values)
+		plt.title('Graph')
+		plt.xlabel('Dates')
+		plt.ylabel('Values')
+		plt.show()
+
+	elif input_date >= one_month_ago:
+
+		#execute the function
+		dates,values = get_time_series_12hours(input_timestamp,'btceur')
 			
 		plt.plot(dates,values)
 		plt.title('Graph')

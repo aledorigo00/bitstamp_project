@@ -35,7 +35,7 @@ def get_time_series_30min(start, currency):
     return dates, values
 
 
-def get_time_series_3hours(start, currency):
+def get_time_series_4hours(start, currency):
     '''
     This functions returns the time series of a crypto/fiat currency pair
     prices, taking as input two parameters: 
@@ -43,7 +43,28 @@ def get_time_series_3hours(start, currency):
         - currency: the currency pair to be retreived (e.g. btceur, ethusd)
     '''
     time_series_URL = 'https://www.bitstamp.net/api/v2/ohlc/'+currency+'/'
-    r = requests.get(time_series_URL, params={'start':start, 'step':10800, 'limit':1000})
+    r = requests.get(time_series_URL, params={'start':start, 'step':14400, 'limit':1000})
+    total = json.loads(r.text)
+    data=total['data']
+    ohlc=data['ohlc']
+    
+    dates = []
+    values = []
+    for point in ohlc:
+        dates.append(datetime.fromtimestamp(int(point['timestamp'])))
+        values.append(float(point['close']))
+    return dates, values
+
+
+def get_time_series_12hours(start, currency):
+    '''
+    This functions returns the time series of a crypto/fiat currency pair
+    prices, taking as input two parameters: 
+        - start: the timestamp that indicates the beginning of the searching period
+        - currency: the currency pair to be retreived (e.g. btceur, ethusd)
+    '''
+    time_series_URL = 'https://www.bitstamp.net/api/v2/ohlc/'+currency+'/'
+    r = requests.get(time_series_URL, params={'start':start, 'step':43200, 'limit':1000})
     total = json.loads(r.text)
     data=total['data']
     ohlc=data['ohlc']
