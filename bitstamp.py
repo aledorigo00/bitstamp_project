@@ -5,7 +5,7 @@ from datetime import datetime
 
 def get_price(currency):
     '''
-    This function returns the price of a crypto/fiar currency pair at the moment.
+    This function returns the price of a currency pair at the moment.
     It takes as input the currency pair.
     '''
     bitstamp_URL = 'https://www.bitstamp.net/api/v2/ticker/%s/'
