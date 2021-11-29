@@ -14,6 +14,9 @@ from bitstamp import get_time_series_oneday
 #import modules from graph.py
 from graph import plot_graph
 
+#import modules from csv.py
+from write_csv import write_csv
+
 
 #Here we add the arguments that the users can input, namely crypto currency, 
 #fiat currency and the optional argument date
@@ -21,6 +24,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("crypto", help="Type crypto ticker (btc, eth)")
 parser.add_argument("fiat", help="Type fiat ticker (eur, usd)")
 parser.add_argument('-d',"--date", help="Type date dd/mm/yyyy")
+parser.add_argument('-c',"--csv", action="store_true", help="Flag to save the result in csv format")
 args = parser.parse_args()
 
 #create the currency pair from user inputs
@@ -57,36 +61,51 @@ if args.date is not None:
 	one_month_ago = today - timedelta(days=30)
 
 	if input_date >= four_days_ago:
-		
 		#execute the function
-		dates,values = get_time_series_30min(input_timestamp, currency_pair)
+		dates,prices = get_time_series_30min(input_timestamp, currency_pair)
 		
-		#Plot the graph	
-		plot_graph(dates, values)
+		if args.csv:
+			#create a csv file and write it on the folder
+			write_csv(currency_pair, input_date, today, dates, prices)
+		else:
+			#Plot the graph	
+			plot_graph(currency_pair, dates, prices)
 
 	elif input_date >= two_weeks_ago:
 
 		#execute the function
-		dates,values = get_time_series_4hours(input_timestamp, currency_pair)
+		dates,prices = get_time_series_4hours(input_timestamp, currency_pair)
 			
-		#Plot the graph	
-		plot_graph(dates, values)
+		if args.csv:
+			#create a csv file and write it on the folder
+			write_csv(currency_pair, input_date, today, dates, prices)
+		else:
+			#Plot the graph	
+			plot_graph(currency_pair, dates, prices)
 
 	elif input_date >= one_month_ago:
 
 		#execute the function
-		dates,values = get_time_series_12hours(input_timestamp, currency_pair)
+		dates,prices = get_time_series_12hours(input_timestamp, currency_pair)
 			
-		#Plot the graph	
-		plot_graph(dates, values)
+		if args.csv:
+			#create a csv file and write it on the folder
+			write_csv(currency_pair, input_date, today, dates, prices)
+		else:
+			#Plot the graph	
+			plot_graph(currency_pair, dates, prices)
 
 	else:
 
 		#execute the function
-		dates,values = get_time_series_oneday(input_timestamp, currency_pair)
+		dates,prices = get_time_series_oneday(input_timestamp, currency_pair)
 			
-		#Plot the graph	
-		plot_graph(dates, values)
+		if args.csv:
+			#create a csv file and write it on the folder
+			write_csv(currency_pair, input_date, today, dates, prices)
+		else:
+			#Plot the graph	
+			plot_graph(currency_pair, dates, prices)
 
 else:
 
