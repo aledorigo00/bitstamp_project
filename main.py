@@ -1,11 +1,15 @@
 import argparse #imported argparse module
-import time #imported time module
+from datetime import time #imported time module
 from datetime import datetime, timezone
+from datetime import date
+from datetime import timedelta
 import matplotlib.pyplot as plt
 
 #import modules to fetch information from a public API 
-from bitstamp import get_price 
-from bitstamp import get_time_series
+from bitstamp import get_time_series_oneday
+from bitstamp import get_time_series_30min
+from bitstamp import get_time_series_4hours
+from bitstamp import get_time_series_12hours
 
 
 #Here we add the arguments that the users can input, namely crypto currency, 
@@ -17,26 +21,82 @@ parser.add_argument('-d',"--date", help="Type date dd/mm/yyyy")
 args = parser.parse_args()
 
 
+
+
 #check if the optional argument date is flagged or not
 if args.date is not None:
+	
 	#split the input string into year, month and day
 	day=int(args.date.split('/')[0])
 	month=int(args.date.split('/')[1])
 	year=int(args.date.split('/')[2])
 
+	#create a date from inputs to check the length of the search period
+	input_date = date( year, month, day)
+	print(input_date)
 	#create a datetime from the data entered by the user and convert to 
 	#the Unix timestamp format required by the API
 	dt = datetime( year, month, day, 00, 00, 00, tzinfo=timezone.utc )
-	timestamp = int( dt.timestamp() )
+	input_timestamp = int( dt.timestamp() )
+	print(input_timestamp)
 
-	#execute the function
-	dates,values = get_time_series(timestamp,'btceur')
-	
-	plt.plot(dates,values)
-	plt.title('Graph')
-	plt.xlabel('Dates')
-	plt.ylabel('Values')
-	plt.show()
+	'''
+	gather today's date and calculate the date of one week ago for 
+	choosing the right frequence of datapoint:
+	- if time span is one day, datapoint every 30 minutes
+	- if time span is within one week, datapoint every 3 hours
+	-if timestamp is over one week, datapoint every day
+	'''
+	today = date.today()
+	four_days_ago = today - timedelta(days=4)
+	two_weeks_ago = today - timedelta(days=14)
+	one_month_ago = today - timedelta(days=30)
+
+	if input_date >= four_days_ago:
+		
+		#execute the function
+		dates,values = get_time_series_30min(input_timestamp,'btceur')
+			
+		plt.plot(dates,values)
+		plt.title('Graph')
+		plt.xlabel('Dates')
+		plt.ylabel('Values')
+		plt.show()
+
+	elif input_date >= two_weeks_ago:
+
+		#execute the function
+		dates,values = get_time_series_4hours(input_timestamp,'btceur')
+			
+		plt.plot(dates,values)
+		plt.title('Graph')
+		plt.xlabel('Dates')
+		plt.ylabel('Values')
+		plt.show()
+
+	elif input_date >= one_month_ago:
+
+		#execute the function
+		dates,values = get_time_series_12hours(input_timestamp,'btceur')
+			
+		plt.plot(dates,values)
+		plt.title('Graph')
+		plt.xlabel('Dates')
+		plt.ylabel('Values')
+		plt.show()
+
+	else:
+
+		#execute the function
+		dates,values = get_time_series_oneday(input_timestamp,'btceur')
+			
+		plt.plot(dates,values)
+		plt.title('Graph')
+		plt.xlabel('Dates')
+		plt.ylabel('Values')
+		plt.show()
+
+
 
 else:
 	#The case in which the fiat selection is eur
@@ -61,5 +121,8 @@ else:
 		#Instead if the typed coin is eth, then return the price of eth in euro.
 		elif args.crypto == "eth":
 			to_print = get_price("ethusd")
+
+
+
 
 	print(to_print) #print the result
