@@ -1,11 +1,14 @@
 import argparse #imported argparse module
-import time #imported time module
-from datetime import datetime, timezone, date, timedelta
+from datetime import time #imported time module
+from datetime import datetime, timezone
+from datetime import date
+from datetime import timedelta
 import matplotlib.pyplot as plt
 
 #import modules to fetch information from a public API 
-from bitstamp import get_price 
 from bitstamp import get_time_series_oneday
+from bitstamp import get_time_series_30min
+from bitstamp import get_time_series_3hours
 
 
 #Here we add the arguments that the users can input, namely crypto currency, 
@@ -17,25 +20,50 @@ parser.add_argument('-d',"--date", help="Type date dd/mm/yyyy")
 args = parser.parse_args()
 
 
+
+
 #check if the optional argument date is flagged or not
 if args.date is not None:
-	today = date.today()
-	week_ago = today - date.timedelta(days=7)
 	
+	#split the input string into year, month and day
+	day=int(args.date.split('/')[0])
+	month=int(args.date.split('/')[1])
+	year=int(args.date.split('/')[2])
 
-	if args.date == today:
-		#split the input string into year, month and day
-		day=int(args.date.split('/')[0])
-		month=int(args.date.split('/')[1])
-		year=int(args.date.split('/')[2])
+	#create a date from inputs to check the length of the search period
+	input_date = date( year, month, day)
+	print(input_date)
+	#create a datetime from the data entered by the user and convert to 
+	#the Unix timestamp format required by the API
+	dt = datetime( year, month, day, 00, 00, 00, tzinfo=timezone.utc )
+	input_timestamp = int( dt.timestamp() )
+	print(input_timestamp)
 
-		#create a datetime from the data entered by the user and convert to 
-		#the Unix timestamp format required by the API
-		dt = datetime( year, month, day, 00, 00, 00, tzinfo=timezone.utc )
-		timestamp = int( dt.timestamp() )
+	'''
+	gather today's date and calculate the date of one week ago for 
+	choosing the right frequence of datapoint:
+	- if time span is one day, datapoint every 30 minutes
+	- if time span is within one week, datapoint every 3 hours
+	-if timestamp is over one week, datapoint every day
+	'''
+	today = date.today()
+	week_ago = today - timedelta(days=7)
+
+	if input_date == today:
+		
+		#execute the function
+		dates,values = get_time_series_30min(input_timestamp,'btceur')
+			
+		plt.plot(dates,values)
+		plt.title('Graph')
+		plt.xlabel('Dates')
+		plt.ylabel('Values')
+		plt.show()
+
+	elif input_date >= week_ago:
 
 		#execute the function
-		dates,values = get_time_series_oneday(timestamp,'btceur')
+		dates,values = get_time_series_3hours(input_timestamp,'btceur')
 			
 		plt.plot(dates,values)
 		plt.title('Graph')
@@ -44,23 +72,16 @@ if args.date is not None:
 		plt.show()
 
 	else:
-		day=int(args.date.split('/')[0])
-		month=int(args.date.split('/')[1])
-		year=int(args.date.split('/')[2])
-
-		#create a datetime from the data entered by the user and convert to 
-		#the Unix timestamp format required by the API
-		dt = datetime( year, month, day, 00, 00, 00, tzinfo=timezone.utc )
-		timestamp = int( dt.timestamp() )
 
 		#execute the function
-		dates,values = get_time_series_oneday(timestamp,'btceur')
+		dates,values = get_time_series_oneday(input_timestamp,'btceur')
 			
 		plt.plot(dates,values)
 		plt.title('Graph')
 		plt.xlabel('Dates')
 		plt.ylabel('Values')
 		plt.show()
+
 
 
 else:
