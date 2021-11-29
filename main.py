@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 from datetime import date
 from datetime import timedelta
 
-#import modules from bitstapm.py to fetch information from a public API 
+#import modules from bitstamp.py to fetch information from a public API 
 from bitstamp import get_price
 from bitstamp import get_time_series_30min
 from bitstamp import get_time_series_4hours
