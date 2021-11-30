@@ -70,7 +70,7 @@ if args.date is not None:
 		
 		if args.csv:
 			#create a csv file and write it on the folder
-			write_csv(currency_pair, input_date, today, dates, prices)
+			write_csv(currency_pair, input_date, today, dates, closings)
 		else:
 			#Plot the graph	
 			plot_graph_30min(currency_pair, dates, openings, closings, highs, lows)
@@ -82,7 +82,7 @@ if args.date is not None:
 			
 		if args.csv:
 			#create a csv file and write it on the folder
-			write_csv(currency_pair, input_date, today, dates, prices)
+			write_csv(currency_pair, input_date, today, dates, closings)
 		else:
 			#Plot the graph	
 			plot_graph_4hours(currency_pair, dates, openings, closings, highs, lows)
@@ -94,7 +94,7 @@ if args.date is not None:
 			
 		if args.csv:
 			#create a csv file and write it on the folder
-			write_csv(currency_pair, input_date, today, dates, prices)
+			write_csv(currency_pair, input_date, today, dates, closings)
 		else:
 			#Plot the graph	
 			plot_graph_12hours(currency_pair, dates, openings, closings, highs, lows)
@@ -106,7 +106,7 @@ if args.date is not None:
 			
 		if args.csv:
 			#create a csv file and write it on the folder
-			write_csv(currency_pair, input_date, today, dates, prices)
+			write_csv(currency_pair, input_date, today, dates, closings)
 		else:
 			#Plot the graph	
 			plot_graph_oneday(currency_pair, dates, openings, closings, highs, lows)
