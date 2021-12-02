@@ -5,6 +5,7 @@ import matplotlib.dates as mpl_dates
 
 
 
+
 def plot_graph_30min(currency, dates, openings, closings, highs, lows ):
     data = pd.DataFrame() 
     data["dates"]= dates
@@ -12,7 +13,6 @@ def plot_graph_30min(currency, dates, openings, closings, highs, lows ):
     data["highs"]= highs
     data["lows"]= lows
     data["closings"]= closings
-
 
     plt.style.use('ggplot')
 
@@ -25,18 +25,28 @@ def plot_graph_30min(currency, dates, openings, closings, highs, lows ):
     fig, ax = plt.subplots()
 
     candlestick_ohlc(ax, ohlc.values, width=0.015, colorup='green', colordown='red', alpha=0.8)
+    
+    # Inserting legend image at the top-right of the graph
+    im = plt.imread('candlestick.png') # insert local path of the image.
+    newax = fig.add_axes([0.8,0.8,0.2,0.2], anchor='SE', zorder=0)
+    newax.imshow(im)
+    newax.axis('off')
+
 
     # Setting labels & titles
     ax.set_xlabel('Date')
     ax.set_ylabel('Price')
-    fig.suptitle('Candlestick Chart' + currency)
+
+    crypto= currency[:3]
+    fiat= currency[3:]
+    fig.suptitle('Candlestick Chart for: ' + crypto.upper() + " " + fiat.upper())
+
+
 
     # Formatting Date
     date_format = mpl_dates.DateFormatter('%d-%m-%Y')
     ax.xaxis.set_major_formatter(date_format)
     fig.autofmt_xdate()
-
-    fig.tight_layout()
 
     plt.show()
 
