@@ -20,9 +20,6 @@ from graph import plot_graph_12hours
 from graph import plot_graph_oneday
 
 #import modules from csv.py
-from functions import date_validation
-
-#import modules from csv.py
 from write_csv import write_csv
 
 
@@ -60,7 +57,7 @@ else:
 #check if the optional argument date is flagged or not
 if args.date is not None:
 	
-	if validate(args.date):
+	if date_validation(args.date):
 		currency_pair=args.crypto+args.fiat
 	else:
 		print('the data provided is not in the correct format')

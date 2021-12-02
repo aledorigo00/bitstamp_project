@@ -69,7 +69,7 @@ def get_time_series_4hours(start, currency):
         - start: the timestamp that indicates the beginning of the searching period
         - currency: the currency pair to be retreived (e.g. btceur, ethusd)'''
     time_series_URL = 'https://www.bitstamp.net/api/v2/ohlc/'+currency+'/'
-    r = requests.get(time_series_URL, params={'start':start, 'step':14400, 'limit':1000})
+    r = requests.get(time_series_URL, params={'start':start, 'step':14400, 'limit':200})
     dates, openings, closings, highs, lows = read_ohlc_data_extended(r)
     return dates, openings, closings, highs, lows
 
@@ -80,7 +80,7 @@ def get_time_series_12hours(start, currency):
         - start: the timestamp that indicates the beginning of the searching period
         - currency: the currency pair to be retreived (e.g. btceur, ethusd)'''
     time_series_URL = 'https://www.bitstamp.net/api/v2/ohlc/'+currency+'/'
-    r = requests.get(time_series_URL, params={'start':start, 'step':43200, 'limit':1000})
+    r = requests.get(time_series_URL, params={'start':start, 'step':43200, 'limit':200})
     dates, openings, closings, highs, lows = read_ohlc_data_extended(r)
     return dates, openings, closings, highs, lows
 
@@ -91,7 +91,7 @@ def get_time_series_oneday(start, currency):
         - start: the timestamp that indicates the beginning of the searching period
         - currency: the currency pair to be retreived (e.g. btceur, ethusd)'''
     time_series_URL = 'https://www.bitstamp.net/api/v2/ohlc/'+currency+'/'
-    r = requests.get(time_series_URL, params={'start':start, 'step':86400, 'limit':1000})
+    r = requests.get(time_series_URL, params={'start':start, 'step':86400, 'limit':200})
     dates, openings, closings, highs, lows = read_ohlc_data_extended(r)
     return dates, openings, closings, highs, lows
 
