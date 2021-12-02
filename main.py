@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 from datetime import date
 from datetime import timedelta
 import pandas as pd
+import sys
 
 #import modules from bitstamp.py to fetch information from a public API 
 from bitstamp import get_price
@@ -19,8 +20,20 @@ from graph import plot_graph_12hours
 from graph import plot_graph_oneday
 
 #import modules from csv.py
+from functions import date_validation
+
+#import modules from csv.py
 from write_csv import write_csv
 
+
+#function that checks for the valid date input
+def date_validation(testdate):
+    try:
+        if testdate != datetime.strptime(testdate, "%d/%m/%Y").strftime("%d/%m/%Y"):
+            raise ValueError
+        return True
+    except ValueError:
+        return False
 
 #Here we add the arguments that the users can input, namely crypto currency, 
 #fiat currency and the optional argument date
@@ -31,13 +44,29 @@ parser.add_argument('-d',"--date", help="Type date dd/mm/yyyy")
 parser.add_argument('-c',"--csv", action="store_true", help="Flag to save the result in csv format")
 args = parser.parse_args()
 
-#create the currency pair from user inputs
-currency_pair=args.crypto+args.fiat
+cryptos=['btc', 'eth', 'xrp']
+fiats=['eur', 'usd']
+
+#check the validity of the inputs and create the currency pair from them
+if args.crypto in cryptos and args.fiat in fiats:
+	currency_pair=args.crypto+args.fiat
+else:
+	print('the arguments provided are not in our database')
+	print('- for crypto you can use', cryptos)
+	print('- for fiat you can use', fiats)
+	sys.exit()
 
 
 #check if the optional argument date is flagged or not
 if args.date is not None:
 	
+	if validate(args.date):
+		currency_pair=args.crypto+args.fiat
+	else:
+		print('the data provided is not in the correct format')
+		print('The correct format is dd/mm/yyyy')
+		sys.exit()
+
 	#split the input string into year, month and day
 	day=int(args.date.split('/')[0])
 	month=int(args.date.split('/')[1])
@@ -50,6 +79,7 @@ if args.date is not None:
 	#the Unix timestamp format required by the API
 	dt = datetime( year, month, day, 00, 00, 00, tzinfo=timezone.utc )
 	input_timestamp = int( dt.timestamp() )
+	print(input_timestamp)
 	
 	'''
 	gather today's date and calculate the date of one week ago for 
