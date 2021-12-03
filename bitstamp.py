@@ -57,21 +57,30 @@ def get_time_series_30min(start, currency):
     taking as input two parameters: 
         - start: the timestamp that indicates the beginning of the searching period
         - currency: the currency pair to be retreived (e.g. btceur, ethusd)'''
-    time_series_URL = 'https://www.bitstamp.net/api/v2/ohlc/'+currency+'/'
-    r = requests.get(time_series_URL, params={'start':start, 'step':1800, 'limit':100})
-    dates, openings, closings, highs, lows = read_ohlc_data_extended(r)
-    return dates, openings, closings, highs, lows
 
+    if (type(start)!=int or type(currency)!=str):
+        return None
+
+    else:
+        time_series_URL = 'https://www.bitstamp.net/api/v2/ohlc/'+currency+'/'
+        r = requests.get(time_series_URL, params={'start':start, 'step':1800, 'limit':100})
+        dates, openings, closings, highs, lows = read_ohlc_data_extended(r)
+        return dates, openings, closings, highs, lows
 
 def get_time_series_4hours(start, currency):
     '''This functions returns the price time serie every 4 hours of a currency pair, 
     taking as input two parameters: 
         - start: the timestamp that indicates the beginning of the searching period
         - currency: the currency pair to be retreived (e.g. btceur, ethusd)'''
-    time_series_URL = 'https://www.bitstamp.net/api/v2/ohlc/'+currency+'/'
-    r = requests.get(time_series_URL, params={'start':start, 'step':14400, 'limit':200})
-    dates, openings, closings, highs, lows = read_ohlc_data_extended(r)
-    return dates, openings, closings, highs, lows
+
+    if (type(start)!=int or type(currency)!=str):
+        return None
+
+    else:
+        time_series_URL = 'https://www.bitstamp.net/api/v2/ohlc/'+currency+'/'
+        r = requests.get(time_series_URL, params={'start':start, 'step':14400, 'limit':200})
+        dates, openings, closings, highs, lows = read_ohlc_data_extended(r)
+        return dates, openings, closings, highs, lows
 
 
 def get_time_series_12hours(start, currency): 
@@ -79,10 +88,15 @@ def get_time_series_12hours(start, currency):
     taking as input two parameters: 
         - start: the timestamp that indicates the beginning of the searching period
         - currency: the currency pair to be retreived (e.g. btceur, ethusd)'''
-    time_series_URL = 'https://www.bitstamp.net/api/v2/ohlc/'+currency+'/'
-    r = requests.get(time_series_URL, params={'start':start, 'step':43200, 'limit':200})
-    dates, openings, closings, highs, lows = read_ohlc_data_extended(r)
-    return dates, openings, closings, highs, lows
+
+    if (type(start)!=int or type(currency)!=str):
+        return None
+
+    else:
+        time_series_URL = 'https://www.bitstamp.net/api/v2/ohlc/'+currency+'/'
+        r = requests.get(time_series_URL, params={'start':start, 'step':43200, 'limit':200})
+        dates, openings, closings, highs, lows = read_ohlc_data_extended(r)
+        return dates, openings, closings, highs, lows
 
 
 def get_time_series_oneday(start, currency):
@@ -90,8 +104,29 @@ def get_time_series_oneday(start, currency):
     taking as input two parameters:  
         - start: the timestamp that indicates the beginning of the searching period
         - currency: the currency pair to be retreived (e.g. btceur, ethusd)'''
-    time_series_URL = 'https://www.bitstamp.net/api/v2/ohlc/'+currency+'/'
-    r = requests.get(time_series_URL, params={'start':start, 'step':86400, 'limit':200})
-    dates, openings, closings, highs, lows = read_ohlc_data_extended(r)
-    return dates, openings, closings, highs, lows
+
+    if (type(start)!=int or type(currency)!=str):
+        return None
+        
+    else:
+        time_series_URL = 'https://www.bitstamp.net/api/v2/ohlc/'+currency+'/'
+        r = requests.get(time_series_URL, params={'start':start, 'step':86400, 'limit':185})
+        dates, openings, closings, highs, lows = read_ohlc_data_extended(r)
+        return dates, openings, closings, highs, lows
+
+
+def get_time_series_3days(start, currency):
+    '''This functions returns the price time serie every day of a currency pair, 
+    taking as input two parameters:  
+        - start: the timestamp that indicates the beginning of the searching period
+        - currency: the currency pair to be retreived (e.g. btceur, ethusd)'''
+
+    if (type(start)!=int or type(currency)!=str):
+        return None
+        
+    else:
+        time_series_URL = 'https://www.bitstamp.net/api/v2/ohlc/'+currency+'/'
+        r = requests.get(time_series_URL, params={'start':start, 'step':259200, 'limit':185})
+        dates, openings, closings, highs, lows = read_ohlc_data_extended(r)
+        return dates, openings, closings, highs, lows
 
