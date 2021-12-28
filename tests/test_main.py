@@ -6,7 +6,8 @@
 import unittest
 import sys
 import os
-from bitstamp import get_step_30min, get_step_4hours, get_step_12hours, get_step_oneday, get_step_3days
+from bitstamp import get_step_30min, get_step_4hours, get_step_12hours
+from bitstamp import get_step_oneday, get_step_3days
 
 # add parent folder to path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -16,8 +17,10 @@ class TestTimeSeries30min(unittest.TestCase):
 
     # valid values
     def test_valid_values(self):
-        dates, openings, closings, highs, lows = get_step_30min(1638057600, 'btceur')
-        self.assertTrue((len(dates)==len(openings)==len(closings)==len(highs)==len(lows))!=0)
+        dates, openings, closings, highs, lows = get_step_30min(
+            1638057600, 'btceur')
+        self.assertTrue((len(dates) == len(openings) == len(
+            closings) == len(highs) == len(lows)) != 0)
 
     # wrong values
     def test_wrong_values(self):
@@ -33,8 +36,10 @@ class TestTimeSeries4hours(unittest.TestCase):
 
     # valid values
     def test_valid_values(self):
-        dates, openings, closings, highs, lows = get_step_4hours(1638057600, 'btceur')
-        self.assertTrue((len(dates)==len(openings)==len(closings)==len(highs)==len(lows))!=0)
+        dates, openings, closings, highs, lows = get_step_4hours(
+            1638057600, 'btceur')
+        self.assertTrue((len(dates) == len(openings) == len(
+            closings) == len(highs) == len(lows)) != 0)
 
     # wrong values
     def test_wrong_values(self):
@@ -50,8 +55,10 @@ class TestTimeSeries12hours(unittest.TestCase):
 
     # valid values
     def test_valid_values(self):
-        dates, openings, closings, highs, lows = get_step_12hours(1638057600, 'btceur')
-        self.assertTrue((len(dates)==len(openings)==len(closings)==len(highs)==len(lows))!=0)
+        dates, openings, closings, highs, lows = get_step_12hours(
+            1638057600, 'btceur')
+        self.assertTrue((len(dates) == len(openings) == len(
+            closings) == len(highs) == len(lows)) != 0)
 
     # wrong values
     def test_wrong_values(self):
@@ -67,8 +74,10 @@ class TestTimeSeriesOneday(unittest.TestCase):
 
     # valid values
     def test_valid_values(self):
-        dates, openings, closings, highs, lows = get_step_oneday(1638057600, 'btceur')
-        self.assertTrue((len(dates)==len(openings)==len(closings)==len(highs)==len(lows))!=0)
+        dates, openings, closings, highs, lows = get_step_oneday(
+            1638057600, 'btceur')
+        self.assertTrue((len(dates) == len(openings) == len(
+            closings) == len(highs) == len(lows)) != 0)
 
     # wrong values
     def test_wrong_values(self):
@@ -84,8 +93,10 @@ class TestTimeSeries3days(unittest.TestCase):
 
     # valid values
     def test_valid_values(self):
-        dates, openings, closings, highs, lows = get_step_3days(1638057600, 'btceur')
-        self.assertTrue((len(dates)==len(openings)==len(closings)==len(highs)==len(lows))!=0)
+        dates, openings, closings, highs, lows = get_step_3days(
+            1638057600, 'btceur')
+        self.assertTrue((len(dates) == len(openings) == len(
+            closings) == len(highs) == len(lows)) != 0)
 
     # wrong values
     def test_wrong_values(self):
@@ -98,6 +109,6 @@ class TestTimeSeries3days(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    
+
     # test with details
     unittest.main(verbosity=2)
