@@ -1,33 +1,21 @@
-#imported needed modules
+'''this module is the one which the user must execute in order
+	to use the software. It manages all the functioning of our program
+'''
 import argparse 
-from datetime import datetime, timezone 
-from datetime import date
-from datetime import timedelta
-import pandas as pd
+from datetime import datetime, timezone, date, timedelta
 import sys
 
 #import modules from bitstamp.py to fetch information from a public API 
-from bitstamp import get_price
-from bitstamp import get_time_series_30min
-from bitstamp import get_time_series_4hours
-from bitstamp import get_time_series_12hours
-from bitstamp import get_time_series_oneday
-from bitstamp import get_time_series_3days
+from bitstamp import get_price, get_step_30min, get_step_4hours, get_step_12hours, get_step_oneday, get_step_3days
 
 #import modules from graph.py
-from graph import plot_graph_30min
-from graph import plot_graph_4hours 
-from graph import plot_graph_12hours 
-from graph import plot_graph_oneday
-from graph import plot_graph_3days
+from graph import plot_candlestick_graph
 
 #import modules from csv.py
 from write_csv import write_csv
 
 #import the classes for each input
-from inputs import inputCrypto
-from inputs import inputFiat
-from inputs import inputDate
+from inputs import inputCrypto, inputFiat, inputDate
 
 #Here we add the arguments that the users can input, namely crypto currency, 
 #fiat currency and the optional argument date
@@ -44,7 +32,8 @@ fiat_obj=inputFiat(args.fiat)
 
 ''' check the validity of the inputs with the class method. 
 	if they're valid, we create the currency pair from them, 
-	otherwise we print an error and exit the program'''
+	otherwise we print an error and exit the program
+'''
 if crypto_obj.valid() and fiat_obj.valid():
 	currency_pair=crypto_obj.crypto + fiat_obj.fiat
 else:
@@ -62,7 +51,8 @@ if args.date is not None:
 
 	''' check the validity of the input date by using the class method.
 		if it is valid, we proceed with the split, otherwise 
-		we print an error and exit the program'''
+		we print an error and exit the program
+	'''
 	if not date_obj.valid():
 		print('The data provided is not in the correct format.')
 		print('The correct format is dd/mm/yyyy.')
@@ -79,13 +69,14 @@ if args.date is not None:
 	dt = datetime( year, month, day, 00, 00, 00, tzinfo=timezone.utc )
 	input_timestamp = int( dt.timestamp() )
 	
-	'''
-	gather today's date and calculate the date of one week ago for 
-	choosing the right frequence of datapoint:
-	- if time span is within four days, datapoint every 30 minutes
-	- if time span is within two weeks, datapoint every 4 hours
-	- if time span is within one month, datapoint every 12 hours	
-	- if timestamp is over one month, datapoint every day
+	'''gather today's date and calculate the dates of some key points 
+		in past time to choose the frequence of datapoints in order to 
+		always obrain a readable graph:
+		- if time span is within 4 days, datapoint every 30 minutes
+		- if time span is within 2 weeks, datapoint every 4 hours
+		- if time span is within 2 months, datapoint every 12 hours
+		- if time span is within 6 months, datapoint every one day	
+		- if time span is over 6 months, datapoint every 3 days
 	'''
 	today = date.today()
 	four_days_ago = today - timedelta(days=4)
@@ -94,6 +85,7 @@ if args.date is not None:
 	six_month_ago = today - timedelta(days=183)
 	one_year_ago = today - timedelta(days=365)
 
+	#check corner inputs to guarantee perfect funcioning of the program
 	if input_date<one_year_ago:
 		print('Sorry, the date you entered is too far.')
 		print('You can choose a starting date up to one year from now.')
@@ -103,65 +95,74 @@ if args.date is not None:
 		print('Of course, you cannot choose a starting date which is beyond today.')
 		sys.exit()
 
+
+	'''this section compares the date entered by the user with the key past points
+		defined before and executes the time-related function
+	'''
 	if input_date >= four_days_ago:
 		#execute the function
-		dates, openings, closings, highs, lows = get_time_series_30min(input_timestamp, currency_pair)
+		dates, openings, closings, highs, lows = get_step_30min(input_timestamp, currency_pair)
 		
 		if args.csv:
 			#create a csv file and write it on the folder
 			write_csv(currency_pair, input_date, today, dates, closings)
 		else:
-			#Plot the graph	
-			plot_graph_30min(currency_pair, dates, openings, closings, highs, lows)
+			#set the right candles width and plot the graph	
+			width=0.015
+			plot_candlestick_graph(currency_pair, dates, openings, closings, highs, lows, width)
 
 	elif input_date >= two_weeks_ago:
 
 		#execute the function
-		dates, openings, closings, highs, lows = get_time_series_4hours(input_timestamp, currency_pair)
+		dates, openings, closings, highs, lows = get_step_4hours(input_timestamp, currency_pair)
 			
 		if args.csv:
 			#create a csv file and write it on the folder
 			write_csv(currency_pair, input_date, today, dates, closings)
 		else:
-			#Plot the graph	
-			plot_graph_4hours(currency_pair, dates, openings, closings, highs, lows)
+			#set the right candles width and plot the graph		
+			width=0.1
+			plot_candlestick_graph(currency_pair, dates, openings, closings, highs, lows, width)
 
 	elif input_date >= two_month_ago:
 
 		#execute the function
-		dates, openings, closings, highs, lows = get_time_series_12hours(input_timestamp, currency_pair)
+		dates, openings, closings, highs, lows = get_step_12hours(input_timestamp, currency_pair)
 			
 		if args.csv:
 			#create a csv file and write it on the folder
 			write_csv(currency_pair, input_date, today, dates, closings)
 		else:
-			#Plot the graph	
-			plot_graph_12hours(currency_pair, dates, openings, closings, highs, lows)
+			#set the right candles width and plot the graph	
+			width=0.3
+			plot_candlestick_graph(currency_pair, dates, openings, closings, highs, lows, width)
 
 	elif input_date >= six_month_ago:
 
 		#execute the function
-		dates, openings, closings, highs, lows = get_time_series_oneday(input_timestamp, currency_pair)
+		dates, openings, closings, highs, lows = get_step_oneday(input_timestamp, currency_pair)
 			
 		if args.csv:
 			#create a csv file and write it on the folder
 			write_csv(currency_pair, input_date, today, dates, closings)
 		else:
-			#Plot the graph	
-			plot_graph_oneday(currency_pair, dates, openings, closings, highs, lows)
+			#set the right candles width and plot the graph	
+			width=0.6
+			plot_candlestick_graph(currency_pair, dates, openings, closings, highs, lows, width)
 
 	else:
 
 		#execute the function
-		dates, openings, closings, highs, lows = get_time_series_3days(input_timestamp, currency_pair)
+		dates, openings, closings, highs, lows = get_step_3days(input_timestamp, currency_pair)
 			
 		if args.csv:
 			#create a csv file and write it on the folder
 			write_csv(currency_pair, input_date, today, dates, closings)
 		else:
-			#Plot the graph	
-			plot_graph_3days(currency_pair, dates, openings, closings, highs, lows)
+			#set the right candles width and plot the graph	
+			width=2
+			plot_candlestick_graph(currency_pair, dates, openings, closings, highs, lows, width)
 
 else:
-
+	#if none of the above, just print the current price
 	print(get_price(currency_pair))

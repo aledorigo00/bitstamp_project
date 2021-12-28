@@ -1,5 +1,7 @@
-from datetime import datetime
-from datetime import date
+'''This module contains some classes which are needed to manage
+    input arguments and to check their validity
+'''
+from datetime import datetime, date
 
 
 class inputCrypto():
@@ -8,7 +10,6 @@ class inputCrypto():
 
     def __init__(self, crypto):
         self.crypto = crypto 
-
 
     def valid(self):
         if self.crypto in self.cryptos:
