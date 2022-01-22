@@ -38,16 +38,16 @@ def read_ohlc_data(response):
     dates = []
     openings = []
     closings = []
-    highs = []
-    lows = []
+    max = []
+    min = []
     for point in ohlc:
         dates.append(datetime.fromtimestamp(int(point['timestamp'])))
         openings.append(float(point['open']))
         closings.append(float(point['close']))
-        highs.append(float(point['high']))
-        lows.append(float(point['low']))
+        max.append(float(point['high']))
+        min.append(float(point['low']))
 
-    return dates, openings, closings, highs, lows
+    return dates, openings, closings, max, min
 
 
 def get_step_30min(start, currency):
@@ -71,8 +71,8 @@ def get_step_30min(start, currency):
             print("No internet connection.")
             sys.exit()
         else:
-            dates, openings, closings, highs, lows = read_ohlc_data(r)
-            return dates, openings, closings, highs, lows
+            dates, openings, closings, max, min = read_ohlc_data(r)
+            return dates, openings, closings, max, min
 
 
 def get_step_4hours(start, currency):
@@ -96,8 +96,8 @@ def get_step_4hours(start, currency):
             print("No internet connection.")
             sys.exit()
         else:
-            dates, openings, closings, highs, lows = read_ohlc_data(r)
-            return dates, openings, closings, highs, lows
+            dates, openings, closings, max, min = read_ohlc_data(r)
+            return dates, openings, closings, max, min
 
 
 def get_step_12hours(start, currency):
@@ -121,8 +121,8 @@ def get_step_12hours(start, currency):
             print("No internet connection.")
             sys.exit()
         else:
-            dates, openings, closings, highs, lows = read_ohlc_data(r)
-            return dates, openings, closings, highs, lows
+            dates, openings, closings, max, min = read_ohlc_data(r)
+            return dates, openings, closings, max, min
 
 
 def get_step_oneday(start, currency):
@@ -146,8 +146,8 @@ def get_step_oneday(start, currency):
             print("No internet connection.")
             sys.exit()
         else:
-            dates, openings, closings, highs, lows = read_ohlc_data(r)
-            return dates, openings, closings, highs, lows
+            dates, openings, closings, max, min = read_ohlc_data(r)
+            return dates, openings, closings, max, min
 
 
 def get_step_3days(start, currency):
@@ -171,5 +171,5 @@ def get_step_3days(start, currency):
             print("No internet connection.")
             sys.exit()
         else:
-            dates, openings, closings, highs, lows = read_ohlc_data(r)
-            return dates, openings, closings, highs, lows
+            dates, openings, closings, max, min = read_ohlc_data(r)
+            return dates, openings, closings, max, min

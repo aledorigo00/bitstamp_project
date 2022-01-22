@@ -17,10 +17,10 @@ class TestTimeSeries30min(unittest.TestCase):
 
     # valid values
     def test_valid_values(self):
-        dates, openings, closings, highs, lows = get_step_30min(
+        dates, openings, closings, max, min = get_step_30min(
             1638057600, 'btceur')
         self.assertTrue((len(dates) == len(openings) == len(
-            closings) == len(highs) == len(lows)) != 0)
+            closings) == len(max) == len(min)) != 0)
 
     # wrong values
     def test_wrong_values(self):
@@ -36,10 +36,10 @@ class TestTimeSeries4hours(unittest.TestCase):
 
     # valid values
     def test_valid_values(self):
-        dates, openings, closings, highs, lows = get_step_4hours(
+        dates, openings, closings, max, min = get_step_4hours(
             1638057600, 'btceur')
         self.assertTrue((len(dates) == len(openings) == len(
-            closings) == len(highs) == len(lows)) != 0)
+            closings) == len(max) == len(min)) != 0)
 
     # wrong values
     def test_wrong_values(self):
@@ -55,10 +55,10 @@ class TestTimeSeries12hours(unittest.TestCase):
 
     # valid values
     def test_valid_values(self):
-        dates, openings, closings, highs, lows = get_step_12hours(
+        dates, openings, closings, max, min = get_step_12hours(
             1638057600, 'btceur')
         self.assertTrue((len(dates) == len(openings) == len(
-            closings) == len(highs) == len(lows)) != 0)
+            closings) == len(max) == len(min)) != 0)
 
     # wrong values
     def test_wrong_values(self):
@@ -74,10 +74,10 @@ class TestTimeSeriesOneday(unittest.TestCase):
 
     # valid values
     def test_valid_values(self):
-        dates, openings, closings, highs, lows = get_step_oneday(
+        dates, openings, closings, max, min = get_step_oneday(
             1638057600, 'btceur')
         self.assertTrue((len(dates) == len(openings) == len(
-            closings) == len(highs) == len(lows)) != 0)
+            closings) == len(max) == len(min)) != 0)
 
     # wrong values
     def test_wrong_values(self):
@@ -93,10 +93,10 @@ class TestTimeSeries3days(unittest.TestCase):
 
     # valid values
     def test_valid_values(self):
-        dates, openings, closings, highs, lows = get_step_3days(
+        dates, openings, closings, max, min = get_step_3days(
             1638057600, 'btceur')
         self.assertTrue((len(dates) == len(openings) == len(
-            closings) == len(highs) == len(lows)) != 0)
+            closings) == len(max) == len(min)) != 0)
 
     # wrong values
     def test_wrong_values(self):

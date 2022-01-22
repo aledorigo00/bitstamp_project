@@ -105,7 +105,7 @@ if args.date is not None:
     # past points defined before and executes the time-related function
     if input_date >= four_days_ago:
         # execute the function
-        dates, openings, closings, highs, lows = get_step_30min(
+        dates, openings, closings, max, min = get_step_30min(
             input_timestamp, currency_pair)
 
         if args.csv:
@@ -115,12 +115,12 @@ if args.date is not None:
             # set the right candles width and plot the graph
             width = 0.015
             plot_candlestick_graph(currency_pair, dates,
-                                   openings, closings, highs, lows, width)
+                                   openings, closings, max, min, width)
 
     elif input_date >= two_weeks_ago:
 
         # execute the function
-        dates, openings, closings, highs, lows = get_step_4hours(
+        dates, openings, closings, max, min = get_step_4hours(
             input_timestamp, currency_pair)
 
         if args.csv:
@@ -130,12 +130,12 @@ if args.date is not None:
             # set the right candles width and plot the graph
             width = 0.1
             plot_candlestick_graph(currency_pair, dates,
-                                   openings, closings, highs, lows, width)
+                                   openings, closings, max, min, width)
 
     elif input_date >= two_month_ago:
 
         # execute the function
-        dates, openings, closings, highs, lows = get_step_12hours(
+        dates, openings, closings, max, min = get_step_12hours(
             input_timestamp, currency_pair)
 
         if args.csv:
@@ -145,12 +145,12 @@ if args.date is not None:
             # set the right candles width and plot the graph
             width = 0.3
             plot_candlestick_graph(currency_pair, dates,
-                                   openings, closings, highs, lows, width)
+                                   openings, closings, max, min, width)
 
     elif input_date >= six_month_ago:
 
         # execute the function
-        dates, openings, closings, highs, lows = get_step_oneday(
+        dates, openings, closings, max, min = get_step_oneday(
             input_timestamp, currency_pair)
 
         if args.csv:
@@ -160,12 +160,12 @@ if args.date is not None:
             # set the right candles width and plot the graph
             width = 0.6
             plot_candlestick_graph(currency_pair, dates,
-                                   openings, closings, highs, lows, width)
+                                   openings, closings, max, min, width)
 
     else:
 
         # execute the function
-        dates, openings, closings, highs, lows = get_step_3days(
+        dates, openings, closings, max, min = get_step_3days(
             input_timestamp, currency_pair)
 
         if args.csv:
@@ -175,7 +175,7 @@ if args.date is not None:
             # set the right candles width and plot the graph
             width = 2
             plot_candlestick_graph(currency_pair, dates,
-                                   openings, closings, highs, lows, width)
+                                   openings, closings, max, min, width)
 
 else:
     # if none of the above, just print the current price
