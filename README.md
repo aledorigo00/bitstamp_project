@@ -74,7 +74,7 @@ To run the test suite type: ```python -m unittest -v -b tests/test_main.py```
 ## How to contribute to the project
 If you find bugs and errors or you want to submit a request for improvements,
 please open an issue in our github repository. You can find the repository of
-our project at the following link.
+our project at the following link:
 https://github.com/aledorigo00/bitstamp_project.git
 
 ## License
@@ -82,6 +82,6 @@ GPL - 3.0 License https://www.gnu.org/licenses/gpl-3.0.html
 
 
 ## Credit
-Alessandro Dorigo - https://github.com/aledorigo00
-Marco Signora - https://github.com/MarcoSignora
+Alessandro Dorigo - https://github.com/aledorigo00,
+Marco Signora - https://github.com/MarcoSignora,
 Fabio Toffolo - https://github.com/FabioToffy
