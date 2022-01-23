@@ -61,7 +61,8 @@ Command example: ```python main.py btc usd -d 27/11/2021```
 ### CSV price value list
 To Create a list in CSV format of all the price values recorded by
 cryptocurrencies starting from a given period the user has to input
-```- d dd/mm/yyyy - c``` and the program will output a .csv file with the cryptocurrency’s trend from the chosen date to the present date.
+```-d dd/mm/yyyy -c``` and the program will output a .csv file with the 
+cryptocurrency’s trend from the chosen date to the present date.
 
 Command example: ```python main.py btc usd -d 27/11/2021 -c```
 
