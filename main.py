@@ -67,7 +67,7 @@ if args.date is not None:
     # split the input string into year, month and day
     year, month, day = date_obj.split_date()
 
-    # create a date from inputs to check the length of the search period
+    # create a date from inputs to set the length of the search period
     input_date = date(year, month, day)
 
     # create a datetime from the data entered by the user and convert to
@@ -110,11 +110,12 @@ if args.date is not None:
 
         if args.csv:
             # create a csv file and write it on the folder
-            write_csv(currency_pair, input_date, today, dates, closings)
+            write_csv(crypto_obj.crypto, fiat_obj.fiat, input_date, today,
+                    dates, closings)
         else:
             # set the right candles width and plot the graph
             width = 0.015
-            plot_candlestick_graph(currency_pair, dates,
+            plot_candlestick_graph(crypto_obj.crypto, fiat_obj.fiat, dates,
                                    openings, closings, max, min, width)
 
     elif input_date >= two_weeks_ago:
@@ -125,11 +126,12 @@ if args.date is not None:
 
         if args.csv:
             # create a csv file and write it on the folder
-            write_csv(currency_pair, input_date, today, dates, closings)
+            write_csv(crypto_obj.crypto, fiat_obj.fiat, input_date, today,
+                    dates, closings)
         else:
             # set the right candles width and plot the graph
             width = 0.1
-            plot_candlestick_graph(currency_pair, dates,
+            plot_candlestick_graph(crypto_obj.crypto, fiat_obj.fiat, dates,
                                    openings, closings, max, min, width)
 
     elif input_date >= two_month_ago:
@@ -140,11 +142,12 @@ if args.date is not None:
 
         if args.csv:
             # create a csv file and write it on the folder
-            write_csv(currency_pair, input_date, today, dates, closings)
+            write_csv(crypto_obj.crypto, fiat_obj.fiat, input_date, today,
+                    dates, closings)
         else:
             # set the right candles width and plot the graph
             width = 0.3
-            plot_candlestick_graph(currency_pair, dates,
+            plot_candlestick_graph(crypto_obj.crypto, fiat_obj.fiat, dates,
                                    openings, closings, max, min, width)
 
     elif input_date >= six_month_ago:
@@ -155,11 +158,12 @@ if args.date is not None:
 
         if args.csv:
             # create a csv file and write it on the folder
-            write_csv(currency_pair, input_date, today, dates, closings)
+            write_csv(crypto_obj.crypto, fiat_obj.fiat, input_date, today,
+                    dates, closings)
         else:
             # set the right candles width and plot the graph
             width = 0.6
-            plot_candlestick_graph(currency_pair, dates,
+            plot_candlestick_graph(crypto_obj.crypto, fiat_obj.fiat, dates,
                                    openings, closings, max, min, width)
 
     else:
@@ -170,11 +174,12 @@ if args.date is not None:
 
         if args.csv:
             # create a csv file and write it on the folder
-            write_csv(currency_pair, input_date, today, dates, closings)
+            write_csv(crypto_obj.crypto, fiat_obj.fiat, input_date, today,
+                    dates, closings)
         else:
             # set the right candles width and plot the graph
             width = 2
-            plot_candlestick_graph(currency_pair, dates,
+            plot_candlestick_graph(crypto_obj.crypto, fiat_obj.fiat, dates,
                                    openings, closings, max, min, width)
 
 else:

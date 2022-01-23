@@ -13,11 +13,11 @@ def get_price(currency):
     ''' This function returns the price of a currency pair at the moment.
         It takes as input the currency pair.
     '''
-    bitstamp_URL = 'https://www.bitstamp.net/api/v2/ticker/%s/'
+    bitstamp_URL = 'https://www.bitstamp.net/api/v2/ticker/'+currency+'/'
     # check the connection otherwise print an error message and stop the
     # program
     try:
-        r = requests.get(bitstamp_URL % currency)
+        r = requests.get(bitstamp_URL)
     except (requests.ConnectionError, requests.Timeout) as exception:
         print("No internet connection.")
         sys.exit()
@@ -57,7 +57,8 @@ def get_step_30min(start, currency):
     - currency: the currency pair to be retreived (e.g. btceur, ethusd)
     '''
 
-    if (not isinstance(start, int) or not isinstance(currency, str)):
+    if (not isinstance(start, int) or not isinstance(currency, str) or
+    start<=0 or currency==""):
         return None
 
     else:
@@ -81,8 +82,9 @@ def get_step_4hours(start, currency):
     - start: the timestamp that indicates the beginning of the searching period
     - currency: the currency pair to be retreived (e.g. btceur, ethusd)
     '''
-
-    if (not isinstance(start, int) or not isinstance(currency, str)):
+    # check the validity of input parameters
+    if (not isinstance(start, int) or not isinstance(currency, str) or
+    start<=0 or currency==""):
         return None
 
     else:
@@ -106,8 +108,9 @@ def get_step_12hours(start, currency):
     - start: the timestamp that indicates the beginning of the searching period
     - currency: the currency pair to be retreived (e.g. btceur, ethusd)
     '''
-
-    if (not isinstance(start, int) or not isinstance(currency, str)):
+    # check the validity of input parameters
+    if (not isinstance(start, int) or not isinstance(currency, str) or
+    start<=0 or currency==""):
         return None
 
     else:
@@ -131,8 +134,9 @@ def get_step_oneday(start, currency):
     - start: the timestamp that indicates the beginning of the searching period
     - currency: the currency pair to be retreived (e.g. btceur, ethusd)
     '''
-
-    if (not isinstance(start, int) or not isinstance(currency, str)):
+    # check the validity of input parameters
+    if (not isinstance(start, int) or not isinstance(currency, str) or
+    start<=0 or currency==""):
         return None
 
     else:
@@ -156,8 +160,9 @@ def get_step_3days(start, currency):
     - start: the timestamp that indicates the beginning of the searching period
     - currency: the currency pair to be retreived (e.g. btceur, ethusd)
     '''
-
-    if (not isinstance(start, int) or not isinstance(currency, str)):
+    # check the validity of input parameters
+    if (not isinstance(start, int) or not isinstance(currency, str) or
+    start<=0 or currency==""):
         return None
 
     else:

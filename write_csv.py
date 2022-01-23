@@ -5,13 +5,13 @@ import csv
 import os
 
 
-def write_csv(currency, input_date, today, dates, prices):
+def write_csv(crypto, fiat, input_date, today, dates, prices):
     '''This functions takes as inputs the arrays coming from
     the API and writes the csv in the current directory
     '''
     # give a significant name to the generated file and print it to
     # the user together with the path in order to be easily identified
-    name = currency+'_from_'+str(input_date)+'_to_'+str(today)+'.csv'
+    name = crypto+fiat+'_from_'+str(input_date)+'_to_'+str(today)+'.csv'
     print('"'+name+'" has been saved in ' +
           os.path.dirname(os.path.abspath(__file__)))
 

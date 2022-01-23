@@ -8,7 +8,7 @@ import matplotlib.dates as mpl_dates
 
 
 def plot_candlestick_graph(
-           currency, dates, openings, closings, max, min, width):
+           crypto, fiat, dates, openings, closings, max, min, width):
     '''this function is supposed to plot the graph representing the trend
         of a currency pair. It uses candlestick type of graph which best fits
         our purpose of analyzing a financial instrument
@@ -41,9 +41,7 @@ def plot_candlestick_graph(
     newax.axis('off')
 
     # create the graph title with the parameter passed
-    crypto = currency[:3]
-    fiat = currency[3:]
-    fig.suptitle('Candlestick Chart for: ' +
+    fig.suptitle('Candlestick Chart for ' +
                  crypto.upper() + " " + fiat.upper())
 
     # Setting labels
