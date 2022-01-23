@@ -55,6 +55,5 @@ def plot_candlestick_graph(
     ax.xaxis.set_major_formatter(date_format)
     fig.autofmt_xdate()
 
-    # set graph full screen
-    plt.get_current_fig_manager().full_screen_toggle()
+    # show graph
     plt.show()
