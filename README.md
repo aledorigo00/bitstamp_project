@@ -41,13 +41,15 @@ the program outputs the corresponding current price.
 
 Command example: ```python main.py btc usd```
 
-List of cryptocurrencies: btc, eth, xrp, ltc, bch, pax, xlm,
+List of cryptocurrencies: 
+             btc, eth, xrp, ltc, bch, pax, xlm,
              link, omg, usdc, aave, bat, uma, knc, mkr, zrx,
              algo, audio, crv, snx, uni, yfi, comp, grt, usdt,
              eurt, matic, sushi, chz, enj, hbar, alpha, axs,
              ftt, sand, storj, ada, fet, rgt, skl, cel, slp,
              sxp, sgb, dydx, ftm, amp, gala, perp
-FIAT list: usd, eur
+
+List of fiat currencies: usd, eur
 
 ### Visualize cryptocurrencies trend
 It is possible to check and visualize the price trend of cryptocurrencies
@@ -59,7 +61,7 @@ Command example: ```python main.py btc usd -d 27/11/2021```
 ### CSV price value list
 To Create a list in CSV format of all the price values recorded by
 cryptocurrencies starting from a given period the user has to input
-```- d dd / mm / yyyy - c``` and the program will output a .csv file with the cryptocurrency’s trend from the chosen date to the present date.
+```- d dd/mm/yyyy - c``` and the program will output a .csv file with the cryptocurrency’s trend from the chosen date to the present date.
 
 Command example: ```python main.py btc usd -d 27/11/2021 -c```
 
