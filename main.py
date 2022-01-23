@@ -111,7 +111,7 @@ if args.date is not None:
         if args.csv:
             # create a csv file and write it on the folder
             write_csv(crypto_obj.crypto, fiat_obj.fiat, input_date, today,
-                    dates, closings)
+                      dates, closings)
         else:
             # set the right candles width and plot the graph
             width = 0.015
@@ -127,7 +127,7 @@ if args.date is not None:
         if args.csv:
             # create a csv file and write it on the folder
             write_csv(crypto_obj.crypto, fiat_obj.fiat, input_date, today,
-                    dates, closings)
+                      dates, closings)
         else:
             # set the right candles width and plot the graph
             width = 0.1
@@ -143,7 +143,7 @@ if args.date is not None:
         if args.csv:
             # create a csv file and write it on the folder
             write_csv(crypto_obj.crypto, fiat_obj.fiat, input_date, today,
-                    dates, closings)
+                      dates, closings)
         else:
             # set the right candles width and plot the graph
             width = 0.3
@@ -159,7 +159,7 @@ if args.date is not None:
         if args.csv:
             # create a csv file and write it on the folder
             write_csv(crypto_obj.crypto, fiat_obj.fiat, input_date, today,
-                    dates, closings)
+                      dates, closings)
         else:
             # set the right candles width and plot the graph
             width = 0.6
@@ -175,12 +175,19 @@ if args.date is not None:
         if args.csv:
             # create a csv file and write it on the folder
             write_csv(crypto_obj.crypto, fiat_obj.fiat, input_date, today,
-                    dates, closings)
+                      dates, closings)
         else:
             # set the right candles width and plot the graph
             width = 2
             plot_candlestick_graph(crypto_obj.crypto, fiat_obj.fiat, dates,
                                    openings, closings, max, min, width)
+
+elif args.csv:
+    print("Exporting in CSV format is only possible if you specify" +
+          " a starting date for the serching period.")
+    print("Please run the program again indicating the one you" +
+          " have chosen.")
+    sys.exit()
 
 else:
     # if none of the above, just print the current price

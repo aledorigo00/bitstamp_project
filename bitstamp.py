@@ -13,7 +13,7 @@ def get_price(currency):
     ''' This function returns the price of a currency pair at the moment.
         It takes as input the currency pair.
     '''
-    bitstamp_URL = 'https://www.bitstamp.net/api/v2/ticker/'+currency+'/'
+    bitstamp_URL = 'https://www.bitstamp.net/api/v2/ticker/' + currency + '/'
     # check the connection otherwise print an error message and stop the
     # program
     try:
@@ -58,15 +58,15 @@ def get_step_30min(start, currency):
     '''
 
     if (not isinstance(start, int) or not isinstance(currency, str) or
-    start<=0 or currency==""):
+            start <= 0 or currency == ""):
         return None
 
     else:
-        time_series_URL = 'https://www.bitstamp.net/api/v2/ohlc/'+currency+'/'
+        bitstamp_URL = 'https://www.bitstamp.net/api/v2/ohlc/' + currency + '/'
         # check the connection otherwise print an error message and stop the
         # program
         try:
-            r = requests.get(time_series_URL, params={
+            r = requests.get(bitstamp_URL, params={
                              'start': start, 'step': 1800, 'limit': 200})
         except (requests.ConnectionError, requests.Timeout) as exception:
             print("No internet connection.")
@@ -84,15 +84,15 @@ def get_step_4hours(start, currency):
     '''
     # check the validity of input parameters
     if (not isinstance(start, int) or not isinstance(currency, str) or
-    start<=0 or currency==""):
+            start <= 0 or currency == ""):
         return None
 
     else:
-        time_series_URL = 'https://www.bitstamp.net/api/v2/ohlc/'+currency+'/'
+        bitstamp_URL = 'https://www.bitstamp.net/api/v2/ohlc/' + currency + '/'
         # check the connection otherwise print an error message and stop the
         # program
         try:
-            r = requests.get(time_series_URL, params={
+            r = requests.get(bitstamp_URL, params={
                              'start': start, 'step': 14400, 'limit': 200})
         except (requests.ConnectionError, requests.Timeout) as exception:
             print("No internet connection.")
@@ -110,15 +110,15 @@ def get_step_12hours(start, currency):
     '''
     # check the validity of input parameters
     if (not isinstance(start, int) or not isinstance(currency, str) or
-    start<=0 or currency==""):
+            start <= 0 or currency == ""):
         return None
 
     else:
-        time_series_URL = 'https://www.bitstamp.net/api/v2/ohlc/'+currency+'/'
+        bitstamp_URL = 'https://www.bitstamp.net/api/v2/ohlc/' + currency + '/'
         # check the connection otherwise print an error message and stop the
         # program
         try:
-            r = requests.get(time_series_URL, params={
+            r = requests.get(bitstamp_URL, params={
                              'start': start, 'step': 43200, 'limit': 200})
         except (requests.ConnectionError, requests.Timeout) as exception:
             print("No internet connection.")
@@ -136,15 +136,15 @@ def get_step_oneday(start, currency):
     '''
     # check the validity of input parameters
     if (not isinstance(start, int) or not isinstance(currency, str) or
-    start<=0 or currency==""):
+            start <= 0 or currency == ""):
         return None
 
     else:
-        time_series_URL = 'https://www.bitstamp.net/api/v2/ohlc/'+currency+'/'
+        bitstamp_URL = 'https://www.bitstamp.net/api/v2/ohlc/' + currency + '/'
         # check the connection otherwise print an error message and stop the
         # program
         try:
-            r = requests.get(time_series_URL, params={
+            r = requests.get(bitstamp_URL, params={
                              'start': start, 'step': 86400, 'limit': 185})
         except (requests.ConnectionError, requests.Timeout) as exception:
             print("No internet connection.")
@@ -162,15 +162,15 @@ def get_step_3days(start, currency):
     '''
     # check the validity of input parameters
     if (not isinstance(start, int) or not isinstance(currency, str) or
-    start<=0 or currency==""):
+            start <= 0 or currency == ""):
         return None
 
     else:
-        time_series_URL = 'https://www.bitstamp.net/api/v2/ohlc/'+currency+'/'
+        bitstamp_URL = 'https://www.bitstamp.net/api/v2/ohlc/' + currency + '/'
         # check the connection otherwise print an error message and stop the
         # program
         try:
-            r = requests.get(time_series_URL, params={
+            r = requests.get(bitstamp_URL, params={
                              'start': start, 'step': 259200, 'limit': 185})
         except (requests.ConnectionError, requests.Timeout) as exception:
             print("No internet connection.")

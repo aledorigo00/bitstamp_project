@@ -7,12 +7,13 @@ from datetime import datetime, date
 class inputCrypto():
 
     # list of usable cryptocurrencies
-    cryptos = ['btc', 'eth', 'xrp', 'ltc', 'bch', 'pax','xlm',
-    'link','omg','usdc','aave','bat','uma','knc', 'mkr','zrx',
-    'algo','audio','crv','snx','uni','yfi','comp','grt','usdt',
-    'eurt','matic','sushi','chz','enj','hbar','alpha','axs',
-    'ftt','sand','storj','ada','fet','rgt','skl','cel','slp',
-    'sxp','sgb','dydx','ftm','amp','gala','perp']
+    cryptos = ['btc', 'eth', 'xrp', 'ltc', 'bch', 'pax', 'xlm', 'link',
+               'omg', 'usdc', 'aave', 'bat', 'uma', 'knc', 'mkr', 'zrx',
+               'algo', 'audio', 'crv', 'snx', 'uni', 'yfi', 'comp', 'grt',
+               'usdt', 'eurt', 'matic', 'sushi', 'chz', 'enj', 'hbar',
+               'alpha', 'axs', 'ftt', 'sand', 'storj', 'ada', 'fet', 'rgt',
+               'skl', 'cel', 'slp', 'sxp', 'sgb', 'dydx', 'ftm', 'amp',
+               'gala', 'perp']
 
     # constructor
     def __init__(self, crypto):
@@ -35,6 +36,7 @@ class inputFiat():
     def __init__(self, fiat):
         self.fiat = fiat
     # validation of fiat inputs
+
     def valid(self):
         if self.fiat in self.fiats:
             return True
@@ -51,7 +53,7 @@ class inputDate():
     def valid(self):
         try:
             if self.date != datetime.strptime(
-                                self.date, "%d/%m/%Y").strftime("%d/%m/%Y"):
+                    self.date, "%d/%m/%Y").strftime("%d/%m/%Y"):
                 raise ValueError
             return True
         except ValueError:
