@@ -22,14 +22,15 @@ from inputs import inputCrypto, inputFiat, inputDate
 # fiat currency and the optional argument date
 parser = argparse.ArgumentParser()
 parser.add_argument(
-    "crypto", help="Type crypto ticker in lower case (btc, eth, xrp)")
-parser.add_argument("fiat", help="Type fiat ticker in lower case (eur, usd)")
+    "crypto", help="Type crypto ticker in lower case (btc, eth, xrp, ecc.).")
+parser.add_argument("fiat", help="Type fiat ticker in lower case (eur, usd).")
 parser.add_argument(
     '-d',
     "--date",
-    help="Type starting date of the search period in this format dd/mm/yyyy")
+    help="Flag to plot the graph and then type starting date of the search "
+         "period in this format dd/mm/yyyy.")
 parser.add_argument('-c', "--csv", action="store_true",
-                    help="Flag to save the result in csv format")
+                    help="Flag to save the result in csv format.")
 args = parser.parse_args()
 
 # create the objects of inputs with the respective class
